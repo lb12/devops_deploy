@@ -115,7 +115,7 @@ La dirección en la que podemos ver este ejercicio desplegado es: **`http://ec2-
   
 ## **Ejercicio 2**
 
-Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: **`15.188.195.222`**
+Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: **`15.236.27.97`**
 
 Se detalla a continuación todo el proceso seguido para llevar a cabo la práctica:
 
