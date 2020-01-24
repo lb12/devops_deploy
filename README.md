@@ -91,7 +91,7 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 	# ^/ = 'cualquier ruta que empiece por' --> /css ó /img por ejemplo
 	location ~ ^/(css|img|js|fonts|sounds) {
 		root /home/nodeUser/nodepop/public;
-		add_header X-Owner lb12; esto es solo para demostrar que nginx sirve estos archivos estáticos
+		add_header X-Owner lb12; #esto es solo para demostrar que nginx sirve estos archivos estáticos
 		access_log off; # no nos interesa que se muestren en los logs
 		expires max; 
 	}
