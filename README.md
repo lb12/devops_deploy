@@ -78,7 +78,7 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 * Comprobamos la configuración de nginx con `sudo nginx -t` para verificar que esté todo ok.
 * Si ocurriese un error de que el hash de server_name es muy largo, lo podemos resolver cambiando en la configuración de nginx (`sudo nano /etc/nginx/nginx.conf`) descomentando `server_names_hash_bucket_size 64` y modificándolo por 128 para que no nos quedemos cortos.
 * Recargamos nginx para que todas las configuraciones se apliquen: `sudo service nginx reload`
-* Aunque nodepop no hace uso de los WebSockets, lo dejo aquí por si acaso en un futuro se consultase este manual. Para que los WebSockets funcionen correctamente hay que añadir en el `location /` de la app las siguientes 3 líneas de código y recargar nginx:
+* Aunque nodepop no hace uso de los WebSockets, lo dejo aquí por si acaso en un futuro se consultase este manual. Para que los WebSockets funcionen correctamente hay que añadir en el `location /` de la app las siguientes 3 líneas de código y recargar nginx con `sudo service nginx reload`:
 	```
 	proxy_http_version 1.1;
 	proxy_set_header Upgrade $http_upgrade;
@@ -99,9 +99,16 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 * Comprobar la configuración con: `sudo nginx -t`
 * Recargar el servicio de nginx con: `sudo service nginx reload`
 
+### Eliminar el número de versión de nginx
+* Descomentar en `/etc/nginx/nginx.conf` la línea: `server_tokens off;`
+* Recargamos nginx para que todas las configuraciones se apliquen: `sudo service nginx reload`
 
 ### Instalando y configurando MongoDB
-* *TODO*
+* Instalar MongoDB como se indica [aquí](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition).
+  * Importar la clave pública usada por el sistema gestor de paquetes: `wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -`
+  * Crear una lista de archivos para MongoDB: `echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list`
+  * Recargar la BD de paquetes locales: `sudo apt update`
+  * Instalar todos los paquetes de MongoDB: `sudo apt-get install -y mongodb-org`
   
 ## **Ejercicio 2**
 
