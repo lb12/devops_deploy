@@ -62,8 +62,42 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
   * Si quisieramos eliminar ese script de arranque de PM2 podríamos hacerlo usando: `pm2 unstartup systemd`
 
 ### Configurando nginx como proxy inverso
-* *TODO*
+* Crear el server block de la aplicación node como un **superusuario**: `sudo nano sites-available/nodepop`. Dentro del fichero añadimos el siguiente código:
+  
+  ```
+  server {
+	  server_name DNS_Publica_o_Dominio; # indicamos que atienda peticiones bajo esa DNS o ese dominio y aplique las reglas de abajo
+	  location / {
+		  proxy_set_header Host $http_host;
+		  proxy_pass http://127.0.0.1:3000; # le pasamos las peticiones a la app de Nodepop
+		  proxy_redirect_off;
+	  }
+  }
+  ```
+* Crear un symbolic-link a la carpeta de sites-enabled para habilitar este server block: `sudo ln -s /etc/nginx/sites-available/nodepop /etc/nginx/sites-enabled/nodepop`
+* Comprobamos la configuración de nginx con `sudo nginx -t` para verificar que esté todo ok.
+* Si ocurriese un error de que el hash de server_name es muy largo, lo podemos resolver cambiando en la configuración de nginx (`sudo nano /etc/nginx/nginx.conf`) descomentando `server_names_hash_bucket_size 64` y modificándolo por 128 para que no nos quedemos cortos.
+* Recargamos nginx para que todas las configuraciones se apliquen: `sudo service nginx reload`
+* Aunque nodepop no hace uso de los WebSockets, lo dejo aquí por si acaso en un futuro se consultase este manual. Para que los WebSockets funcionen correctamente hay que añadir en el `location /` de la app las siguientes 3 líneas de código y recargar nginx:
+	```
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "Upgrade";  
+	```
 
+### Configurando nginx como servidor de archivos estáticos
+* Abrir el server block de la aplicación node y añadir la siguiente regla **ANTES** de `location / { ... }` que habíamos escrito antes:
+	```
+	# ^/ = 'cualquier ruta que empiece por' --> /css ó /img por ejemplo
+	location ~ ^/(css|img|js|fonts|sounds) {
+		root /home/nodeUser/nodepop/public;
+		add_header X-Owner lb12; esto es solo para demostrar que nginx sirve estos archivos estáticos
+		access_log off; # no nos interesa que se muestren en los logs
+		expires max; 
+	}
+	```
+* Comprobar la configuración con: `sudo nginx -t`
+* Recargar el servicio de nginx con: `sudo service nginx reload`
 
 
 ### Instalando y configurando MongoDB
@@ -88,6 +122,7 @@ Para que nginx sepa cómo servir la aplicación, necesitamos indicarle la inform
 ```
 server {
 	listen 80 default_server;
+	# no incluimos el server_name para que responda directamente por la IP de la máquina
 	root /home/david/web-ej-2;
 	index index.html;
 	location / {
