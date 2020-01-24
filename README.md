@@ -20,6 +20,8 @@ Aunque no se requiere ni se pide en la práctica, en esta memoria, a nivel de re
 ## **Ejercicio 1**
 Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que gestionar los requisitos de estas dependencias. Además, usaremos PM2 para gestionar las distintas aplicaciones que tengamos desplegadas.
 
+La dirección en la que podemos ver este ejercicio desplegado es: **`http://ec2-15-188-195-222.eu-west-3.compute.amazonaws.com/`**
+
 ### Instalando Node
 * Crear usuario node y bloquear acceso vía SSH
 
@@ -88,14 +90,14 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 ### Configurando nginx como servidor de archivos estáticos
 * Abrir el server block de la aplicación node y añadir la siguiente regla **ANTES** de `location / { ... }` que habíamos escrito antes:
 	```
-	# ^/ = 'cualquier ruta que empiece por' --> /css ó /img por ejemplo
-	location ~ ^/(css|img|js|fonts|sounds) {
+	location ~ ^/(images|stylesheets)/ {
 		root /home/nodeUser/nodepop/public;
 		add_header X-Owner lb12; #esto es solo para demostrar que nginx sirve estos archivos estáticos
 		access_log off; # no nos interesa que se muestren en los logs
-		expires max; 
+		expires max;
 	}
 	```
+	Con esa regla le estamos diciendo que todo path que empiece por `/images` ó `/stylesheets`, lo sirva nginx y va a encontrar el contenido en la ruta `/home/nodeUser/nodepop/public`
 * Comprobar la configuración con: `sudo nginx -t`
 * Recargar el servicio de nginx con: `sudo service nginx reload`
 
@@ -113,7 +115,7 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
   
 ## **Ejercicio 2**
 
-Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: `15.188.195.222`
+Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: **`15.188.195.222`**
 
 Se detalla a continuación todo el proceso seguido para llevar a cabo la práctica:
 
