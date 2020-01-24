@@ -27,7 +27,7 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 
   * Bloqueamos el acceso desde el exterior con: `sudo passwd -l nodeUser` (-l proviene de 'lock')
 
-  * Logueamos internamente como nodeUser con: `sudo -u node -i` (-u proviene de user y -i de interactive)
+  * Logueamos internamente como nodeUser con: `sudo -u nodeUser -i` (-u proviene de user y -i de interactive)
 
   * Instalamos nvm para que podamos instalar node con su manager de versiones, desde [esta doc](https://github.com/nvm-sh/nvm#install--update-script).
   * Instalamos node con: `nvm install node`. Utilizar siempre versiones LTS en la medida de lo posible.
@@ -70,7 +70,7 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 	  location / {
 		  proxy_set_header Host $http_host;
 		  proxy_pass http://127.0.0.1:3000; # le pasamos las peticiones a la app de Nodepop
-		  proxy_redirect_off;
+		  proxy_redirect off;
 	  }
   }
   ```
@@ -104,11 +104,12 @@ Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que
 * Recargamos nginx para que todas las configuraciones se apliquen: `sudo service nginx reload`
 
 ### Instalando y configurando MongoDB
-* Instalar MongoDB como se indica [aquí](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition).
+* Instalar MongoDB como se indica [aquí](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition) desde un **superusuario**.
   * Importar la clave pública usada por el sistema gestor de paquetes: `wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -`
   * Crear una lista de archivos para MongoDB: `echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list`
   * Recargar la BD de paquetes locales: `sudo apt update`
   * Instalar todos los paquetes de MongoDB: `sudo apt-get install -y mongodb-org`
+  * Para que MongoDB arranque como servicio hay que hacer: `sudo systemctl enable mongod.service`
   
 ## **Ejercicio 2**
 
