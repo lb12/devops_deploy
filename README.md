@@ -20,7 +20,7 @@ Aunque no se requiere ni se pide en la práctica, en esta memoria, a nivel de re
 ## **Ejercicio 1**
 Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que gestionar los requisitos de estas dependencias. Además, usaremos PM2 para gestionar las distintas aplicaciones que tengamos desplegadas.
 
-La dirección en la que podemos ver este ejercicio desplegado es: **`http://ec2-15-188-195-222.eu-west-3.compute.amazonaws.com/`**
+La dirección en la que podemos ver este ejercicio desplegado es: **`https://depatitos.com`**, como se puede ver se le ha añadido un **certificado SSL**.
 
 ### Instalando Node
 * Crear usuario node y bloquear acceso vía SSH
