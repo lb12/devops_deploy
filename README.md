@@ -112,6 +112,7 @@ La dirección en la que podemos ver este ejercicio desplegado es: **`https://dep
   * Recargar la BD de paquetes locales: `sudo apt update`
   * Instalar todos los paquetes de MongoDB: `sudo apt-get install -y mongodb-org`
   * Para que MongoDB arranque como servicio hay que hacer: `sudo systemctl enable mongod.service`
+  * Si queremos securizar MongoDB (recomendado y casi obligatorio) podemos seguir la [documentación](https://docs.mongodb.com/manual/tutorial/enable-authentication/) que está muy bien explicado.
   
 ## **Ejercicio 2**
 
@@ -152,7 +153,4 @@ Para que no haya conflicto de servidores principales y/o por defecto, hay que el
 
 `sudo rm -rf default`
 
-* La página ya se debería mostrar en el navegador
-
-## Extras opcionales
-Realizar los ejercicios 1 y 2 pero utilizando Docker.
+La página ya se debería mostrar en el navegador.
