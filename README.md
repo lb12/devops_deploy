@@ -20,7 +20,7 @@ Aunque no se requiere ni se pide en la práctica, en esta memoria, a nivel de re
 ## **Ejercicio 1**
 Como vamos a subir una aplicación que hace uso de Node y de MongoDB tenemos que gestionar los requisitos de estas dependencias. Además, usaremos PM2 para gestionar las distintas aplicaciones que tengamos desplegadas.
 
-La dirección en la que podemos ver este ejercicio desplegado es: **`https://depatitos.com`**, como se puede ver se le ha añadido un **certificado SSL**.
+La dirección en la que podemos ver este ejercicio desplegado es: **`https://depatitos.com`**, como se puede ver se le ha añadido un **certificado SSL**. El link del repositorio está [aquí](https://github.com/lb12/nodepop).
 
 ### Instalando Node
 * Crear usuario node y bloquear acceso vía SSH
@@ -116,7 +116,7 @@ La dirección en la que podemos ver este ejercicio desplegado es: **`https://dep
   
 ## **Ejercicio 2**
 
-Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: **`15.236.27.97`**
+Dirección IP en la que tengo la práctica que hice en Fundamentos de HTML y CSS: **`15.236.27.97`**. El link del repositorio está [aquí](https://github.com/lb12/techiex)
 
 Se detalla a continuación todo el proceso seguido para llevar a cabo la práctica:
 
